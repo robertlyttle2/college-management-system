@@ -23,9 +23,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    // TODO - Enable public urls - this is only used for testing purposes
-//    public static final String[] PUBLIC_URLS = { "/user/login", "/api/v1/student/register"};
-    public static final String[] PUBLIC_URLS = { "**" };
+    public static final String[] PUBLIC_URLS = {
+            "/api/v1/user/login",
+            "/api/v1/student/register",
+            "/api/v1/student/enrol",
+            "/api/v1/course/get/**" };
+//    public static final String[] PUBLIC_URLS = { "**" };
 
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;

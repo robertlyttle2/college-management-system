@@ -17,12 +17,12 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @GetMapping("/all/{pageNumber}")
+    @GetMapping("/get/all/{pageNumber}")
     public Page<Student> getAllStudents(@PathVariable("pageNumber") int pageNumber) {
         return studentService.getAllStudents(pageNumber);
     }
 
-    @GetMapping("/{studentId}")
+    @GetMapping("/get/{studentId}")
     public Student getStudent(@PathVariable("studentId") Long id) {
         return studentService.getStudent(id);
     }
@@ -46,6 +46,7 @@ public class StudentController {
                 request.getCourseNumber());
     }
 
+    @PreAuthorize("hasAnyAuthority('student:update')")
     @PutMapping("/update/{studentNumber}")
     public Student update(@PathVariable("studentNumber") String studentNumber, @RequestBody StudentUpdateRequest request) {
         return studentService.update(
@@ -64,8 +65,8 @@ public class StudentController {
         studentService.enrol(studentNumber, courseNumber);
     }
 
-    @DeleteMapping("/{studentId}")
     @PreAuthorize("hasAnyAuthority('student:delete')")
+    @DeleteMapping("/{studentId}")
     public boolean delete(@PathVariable("studentId") Long id) {
         return studentService.delete(id);
     }

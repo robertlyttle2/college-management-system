@@ -31,6 +31,7 @@ public class Course {
     private Long id;
     private String courseNo;
     private String name;
+    // TODO - Implement department enum
     private String department;
     private double cost;
     @Enumerated(value = EnumType.STRING)

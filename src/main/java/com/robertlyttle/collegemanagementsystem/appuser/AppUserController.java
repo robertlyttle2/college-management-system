@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class AppUserController {
         return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyAuthority('user:create')")
     @PostMapping("/add")
     public ResponseEntity<AppUser> addNewUser(
             @RequestParam("firstName") String firstName,
@@ -40,7 +42,7 @@ public class AppUserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    //TODO - Reset Password
+    // TODO - Reset Password
 
 
 }
